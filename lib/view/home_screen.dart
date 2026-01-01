@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_project_avoda/controller/student_controller.dart';
 import 'package:sample_project_avoda/view/student_list_screen.dart';
 
-class MyHomePage extends StatefulWidget {final StudentController controller;
-  const MyHomePage({super.key, required this.title, required this.controller});
-
+class MyHomePage extends StatefulWidget {
   final String title;
+
+  const MyHomePage({super.key, required this.title});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -16,32 +17,37 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         centerTitle: true,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          style: const TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
       body: Center(
-          child: SizedBox(
-        height: 60,
-        width: 200,
-        child: ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.blue)),
+        child: SizedBox(
+          height: 60,
+          width: 200,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+            ),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => StudentListScreen(controller:widget.controller ,),
-              ));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const StudentListScreen(),
+                ),
+              );
             },
-            child: FittedBox(
+            child: const FittedBox(
               child: Text(
-                "View students",
+                "View Students",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-            )),
-      )),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_project_avoda/controller/student_controller.dart';
 
 class AddStudentScreen extends StatefulWidget {
-  final StudentController controller;
-
-  const AddStudentScreen({super.key, required this.controller});
+  const AddStudentScreen({super.key});
 
   @override
   State<AddStudentScreen> createState() => _AddStudentScreenState();
@@ -18,13 +17,15 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<StudentController>(context);
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         title: const Text("Add Student", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Padding(
@@ -34,27 +35,26 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               TextFormField(
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: "Name",
-                  labelStyle: const TextStyle(color: Colors.blue),
-                  prefixIcon: const Icon(Icons.person, color: Colors.blue),
+                  labelStyle: const TextStyle(color: Colors.green),
+                  prefixIcon: const Icon(Icons.person, color: Colors.green),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                    borderSide: const BorderSide(color: Colors.green, width: 2.0),
                   ),
                   filled: true,
-                  fillColor: Colors.blue.shade50,
+                  fillColor: Colors.green.shade50,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 16.0,
@@ -66,27 +66,26 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
               ),
               const SizedBox(height: 20),
 
-             
               TextFormField(
                 controller: courseController,
                 decoration: InputDecoration(
                   labelText: "Course",
-                  labelStyle: const TextStyle(color: Colors.blue),
-                  prefixIcon: const Icon(Icons.school, color: Colors.blue),
+                  labelStyle: const TextStyle(color: Colors.green),
+                  prefixIcon: const Icon(Icons.school, color: Colors.green),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                    borderSide: const BorderSide(color: Colors.green, width: 2.0),
                   ),
                   filled: true,
-                  fillColor: Colors.blue.shade50,
+                  fillColor: Colors.green.shade50,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 16.0,
@@ -98,28 +97,27 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
               ),
               const SizedBox(height: 20),
 
-              
               TextFormField(
                 controller: scoreController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: "Score",
-                  labelStyle: const TextStyle(color: Colors.blue),
-                  prefixIcon: const Icon(Icons.score, color: Colors.blue),
+                  labelStyle: const TextStyle(color: Colors.green),
+                  prefixIcon: const Icon(Icons.score, color: Colors.green),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+                    borderSide: const BorderSide(color: Colors.green),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                    borderSide: const BorderSide(color: Colors.green, width: 2.0),
                   ),
                   filled: true,
-                  fillColor: Colors.blue.shade50,
+                  fillColor: Colors.green.shade50,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 16.0,
@@ -141,10 +139,9 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
               ),
               const SizedBox(height: 40),
 
-              
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 16.0,
@@ -154,9 +151,9 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   ),
                   elevation: 4.0,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    widget.controller.addStudent(
+                    await controller.addStudent(
                       nameController.text,
                       courseController.text,
                       double.parse(scoreController.text),
